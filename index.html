@@ -24,20 +24,24 @@
 
         </div>
 
+        <div class="movie--container"></div>
     </div>
 
 
-    <ul class="movie--container"></ul>
 
 
 
     <!-- Template Handlebars -->
     <script id="movie-template" type="text/x-handlebars-template">
-        <div class="movie--result">
-            <li>{{movieTitle}}</li>
-            <li>{{movieOgTitle}}</li>
-            <li>{{movieLang}}</li>
-            <li>{{movieVote}}</li>
+        <div class="movie--output">
+            <ul class="movie--result">
+                <li>Titolo: {{movieTitle}}</li>
+                <li>Titolo originale: {{movieOgTitle}}</li>
+                <li>Lingua originale: {{movieLang}}</li>
+                <!-- <li>Voto: {{movieVote}}</li> -->
+                <li>Voto: {{{movieVote}}}</li>
+                <!-- <li>Descrizione: {{overview}} <a href="#" class="toggle">View more...</a></li> -->
+            </ul>
 
         </div>
     

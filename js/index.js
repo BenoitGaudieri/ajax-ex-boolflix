@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // Reference
     var button = $(".btn");
+    var input = $(".movie-search");
 
     // Init handlebars
     var source = $("#movie-template").html();
@@ -8,8 +9,28 @@ $(document).ready(function () {
 
     button.click(() => {
         event.preventDefault();
-        search($(".movie-search").val(), template);
+        if (input.val() == "") {
+            alert("Inserisci un valore per la ricerca");
+        } else {
+            search($(".movie-search").val().trim().toLowerCase(), template);
+        }
     });
+
+    input.keyup(function (e) {
+        if (e.which == 13 || e.keyCode == 13) {
+            if (input.val() == "") {
+                alert("Inserisci un valore per la ricerca");
+            } else {
+                search($(".movie-search").val().trim().toLowerCase(), template);
+            }
+        }
+    });
+
+    // $(".toggle").click(() => {
+    //     console.log($(this));
+
+    //     $(this).prev().toggleClass("ellipsis");
+    // });
 
     //
 }); // end Doc ready
@@ -42,25 +63,54 @@ function search(param, template) {
         success: function (res) {
             let results = res.results;
 
-            // Loop through all the results
-            for (let i = 0; i < results.length; i++) {
-                let thisMovie = results[i];
+            if (results.length > 0) {
+                // Loop through all the results
+                for (let i = 0; i < results.length; i++) {
+                    let thisMovie = results[i];
+                    let starVote = calcStars(thisMovie.vote_average);
+                    let lang = checkFlag(thisMovie.original_language);
+                    // console.log(thisMovie);
 
-                // set handlebars template
-                var context = {
-                    movieTitle: thisMovie.title,
-                    movieOgTitle: thisMovie.original_title,
-                    movieLang: thisMovie.original_language,
-                    movieVote: thisMovie.vote_average,
-                };
+                    // set handlebars template
+                    var context = {
+                        movieTitle: thisMovie.title,
+                        movieOgTitle: thisMovie.original_title,
+                        movieLang: thisMovie.original_language,
+                        // movieVote: thisMovie.vote_average,
+                        movieVote: starVote,
+                        // overview: thisMovie.overview,
+                    };
 
-                // compile and append template
-                var html = template(context);
-                $(".movie--container").append(html);
+                    // compile and append template
+                    var html = template(context);
+                    $(".movie--container").append(html);
+                }
+            } else {
+                alert("Nessun film trovato");
+                $(".movie-search").select();
             }
         },
         error: function (err) {
             console.log(err);
         },
     });
+}
+
+function calcStars(vote) {
+    let voteFifth = Math.round(vote / 2);
+    let result = "";
+
+    for (let i = 0; i < 5; i++) {
+        if (voteFifth > 0) {
+            result += '<i class="fas fa-star"></i>';
+            voteFifth -= 1;
+        } else {
+            result += '<i class="far fa-star"></i>';
+        }
+    }
+    return result;
+}
+
+function checkFlag(lang) {
+    // controllo se flag
 }
