@@ -77,18 +77,19 @@ function apiCall(apiUrl, param) {
                     let thisItem = results[i];
                     let starVote = calcStars(thisItem.vote_average);
                     let lang = checkFlag(thisItem.original_language);
+
                     // check if movie or tv show
                     // title
-                    if (thisItem.title == true) {
-                        var title = thisItem.title;
-                    } else {
+                    if (thisItem.title == undefined) {
                         var title = thisItem.name;
+                    } else {
+                        var title = thisItem.title;
                     }
                     // original title
-                    if (thisItem.original_title == true) {
-                        var originalTitle = thisItem.original_title;
-                    } else {
+                    if (thisItem.original_title == undefined) {
                         var originalTitle = thisItem.original_name;
+                    } else {
+                        var originalTitle = thisItem.original_title;
                     }
                     // console.log(thisMovie);
 
