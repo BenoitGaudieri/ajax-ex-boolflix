@@ -35,11 +35,12 @@ $(document).ready(function () {
  * Functions
  */
 
-//  search
-
+/**
+ * Main search
+ * @param {string} param from search query
+ */
 function search(param) {
     // Api refs
-    // const apiUrl = "https://api.themoviedb.org/3/search/movie/";
     const apiMovUrl = "https://api.themoviedb.org/3/search/movie/";
     const apiTvUrl = "https://api.themoviedb.org/3/search/tv/";
 
@@ -53,7 +54,7 @@ function search(param) {
 /**
  * Ajax call
  * @param {url} apiUrl
- * @param {query} param
+ * @param {string} param search query from main search
  */
 function apiCall(apiUrl, param) {
     const apiKey = "45238788959bfbb11d47d87b302def00";
@@ -107,33 +108,16 @@ function apiCall(apiUrl, param) {
                             "https://image.tmdb.org/t/p/w500" +
                             thisItem.poster_path;
                     } else {
-                        background = "http://unsplash.it/g/500?random&blur";
+                        background = "http://unsplash.it/500?random&blur";
                     }
-                    // if (
-                    //     thisItem.backdrop_path == null &&
-                    //     thisItem.poster_path != null
-                    // ) {
-                    //     background =
-                    //         "https://image.tmdb.org/t/p/w500" +
-                    //         thisItem.poster_path;
-                    // } else if (thisItem.poster_path == null) {
-                    //     background = "http://unsplash.it/g/500?random&blur";
-                    // } else {
-                    //     background =
-                    //         "https://image.tmdb.org/t/p/w500" +
-                    //         thisItem.backdrop_path;
-                    // }
 
                     // set handlebars template
                     var context = {
                         poster: background,
                         movieTitle: title,
                         movieOgTitle: originalTitle,
-                        // movieLang: thisMovie.original_language,
                         movieLang: lang,
-                        // movieVote: thisMovie.vote_average,
                         movieVote: starVote,
-                        // overview: thisMovie.overview,
                         type: type,
                     };
 
@@ -152,7 +136,7 @@ function apiCall(apiUrl, param) {
 
 /**
  * Handlebars compiler
- * @param {context} object data
+ * @param {object} context data from api call
  */
 function compileHandlebars(context) {
     // Init handlebars
@@ -166,13 +150,10 @@ function compileHandlebars(context) {
 
 /**
  * Vote in fifths with stars
- * @param {int} vote
+ * @param {int} vote from api call
  */
 function calcStars(vote) {
-    // console.log(vote);
     let voteFifth = Math.round(vote / 2);
-    // console.log(voteFifth);
-
     let result = "";
 
     for (let i = 0; i < 5; i++) {
@@ -186,6 +167,10 @@ function calcStars(vote) {
     return result;
 }
 
+/**
+ * Check and return language or flag
+ * @param {string} lang from api call
+ */
 function checkFlag(lang) {
     if (lang == "it") {
         return '<img src="img/it.svg" alt="it">';
