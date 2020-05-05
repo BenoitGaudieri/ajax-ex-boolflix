@@ -39,15 +39,25 @@ $(document).ready(function () {
 
 function search(param) {
     // Api refs
-    const apiUrl = "https://api.themoviedb.org/3/search/movie/";
+    // const apiUrl = "https://api.themoviedb.org/3/search/movie/";
     const apiMovUrl = "https://api.themoviedb.org/3/search/movie/";
-    const apiTvUrl = "https://api.themoviedb.org/3/search/movie/";
-    const apiKey = "45238788959bfbb11d47d87b302def00";
-    let lang = "it-IT";
+    const apiTvUrl = "https://api.themoviedb.org/3/search/tv/";
 
     // empty the results
     $(".movie--container").html("");
 
+    apiCall(apiMovUrl, param);
+    apiCall(apiTvUrl, param);
+}
+
+/**
+ * Ajax call
+ * @param {url} apiUrl
+ * @param {query} param
+ */
+function apiCall(apiUrl, param) {
+    const apiKey = "45238788959bfbb11d47d87b302def00";
+    let lang = "it-IT";
     // Api call
     $.ajax({
         url: apiUrl,
@@ -64,15 +74,28 @@ function search(param) {
             if (results.length > 0) {
                 // Loop through all the results
                 for (let i = 0; i < results.length; i++) {
-                    let thisMovie = results[i];
-                    let starVote = calcStars(thisMovie.vote_average);
-                    let lang = checkFlag(thisMovie.original_language);
+                    let thisItem = results[i];
+                    let starVote = calcStars(thisItem.vote_average);
+                    let lang = checkFlag(thisItem.original_language);
+                    // check if movie or tv show
+                    // title
+                    if (thisItem.title == true) {
+                        var title = thisItem.title;
+                    } else {
+                        var title = thisItem.name;
+                    }
+                    // original title
+                    if (thisItem.original_title == true) {
+                        var originalTitle = thisItem.original_title;
+                    } else {
+                        var originalTitle = thisItem.original_name;
+                    }
                     // console.log(thisMovie);
 
                     // set handlebars template
                     var context = {
-                        movieTitle: thisMovie.title,
-                        movieOgTitle: thisMovie.original_title,
+                        movieTitle: title,
+                        movieOgTitle: originalTitle,
                         // movieLang: thisMovie.original_language,
                         movieLang: lang,
                         // movieVote: thisMovie.vote_average,
@@ -83,7 +106,7 @@ function search(param) {
                     compileHandlebars(context);
                 }
             } else {
-                alert("Nessun film trovato");
+                alert("Nessun risultato trovato");
                 $(".movie-search").select();
             }
         },
