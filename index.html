@@ -10,24 +10,36 @@
         integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <div class="wrapper">
-        <div class="search-bar">
-            <div class="input-bar">
-                <input type="text" class="movie-search" placeholder="Cerca un film">
-                <button class="btn btn-primary">Search</button>
+        <header class="main-header">
+            <div class="left-side">
+                <div class="logo">Boolflix</div>
+                <ul class="links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Store</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+
             </div>
 
-        </div>
+            <div class="search-bar">
+                <div class="input-bar">
+                    <div class="lens">
+                        <i class="fas fa-search btn"></i>
+                    </div>
+                    <input type="text" class="movie-search" placeholder="Cerca un film">
+                    <!-- <button class="btn btn-primary">Search</button> -->
+                </div>
+            </div>
+        </header>
 
         <div class="movie--container"></div>
     </div>
-
-
 
 
 
