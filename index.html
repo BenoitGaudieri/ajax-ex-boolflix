@@ -34,12 +34,14 @@
     <!-- Template Handlebars -->
     <script id="movie-template" type="text/x-handlebars-template">
         <div class="movie--output">
+            <img class="background" src="{{poster}}" alt="background">
             <ul class="movie--result">
                 <li>Titolo: {{movieTitle}}</li>
                 <li>Titolo originale: {{movieOgTitle}}</li>
                 <li>Lingua originale: {{{movieLang}}}</li>
                 <!-- <li>Voto: {{movieVote}}</li> -->
                 <li>Voto: {{{movieVote}}}</li>
+                <li>Tipo: {{type}} </li>                
                 <!-- <li>Descrizione: {{overview}} <a href="#" class="toggle">View more...</a></li> -->
             </ul>
 

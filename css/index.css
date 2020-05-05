@@ -50,6 +50,7 @@ body {
     color: #dcdfe2;
     animation: entrance 700ms ease-out;
     animation-fill-mode: backwards;
+    position: relative;
 }
 
 @keyframes entrance {
@@ -66,7 +67,13 @@ body {
 }
 
 .movie--result {
+    position: absolute;
+    /* top: 20px; */
+    bottom: 14px;
     list-style: none;
+    width: 95%;
+    background: #00000070;
+    padding: 10px;
 }
 
 .btn-primary {
@@ -91,4 +98,11 @@ body {
 
 .movie--result img {
     width: 16px;
+}
+
+.background {
+    object-fit: cover;
+    object-position: 0 20%;
+    width: 100%;
+    height: 200px;
 }

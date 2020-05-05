@@ -77,24 +77,56 @@ function apiCall(apiUrl, param) {
                     let thisItem = results[i];
                     let starVote = calcStars(thisItem.vote_average);
                     let lang = checkFlag(thisItem.original_language);
+                    let title = "";
+                    let originalTitle = "";
+                    let background = "";
+                    let type = "";
 
                     // check if movie or tv show
                     // title
                     if (thisItem.title == undefined) {
-                        var title = thisItem.name;
+                        title = thisItem.name;
+                        type = "TV show";
                     } else {
-                        var title = thisItem.title;
+                        title = thisItem.title;
+                        type = "Movie";
                     }
                     // original title
                     if (thisItem.original_title == undefined) {
-                        var originalTitle = thisItem.original_name;
+                        originalTitle = thisItem.original_name;
                     } else {
-                        var originalTitle = thisItem.original_title;
+                        originalTitle = thisItem.original_title;
                     }
-                    // console.log(thisMovie);
+                    // background
+                    if (thisItem.backdrop_path != null) {
+                        background =
+                            "https://image.tmdb.org/t/p/w500" +
+                            thisItem.backdrop_path;
+                    } else if (thisItem.poster_path != null) {
+                        background =
+                            "https://image.tmdb.org/t/p/w500" +
+                            thisItem.poster_path;
+                    } else {
+                        background = "http://unsplash.it/g/500?random&blur";
+                    }
+                    // if (
+                    //     thisItem.backdrop_path == null &&
+                    //     thisItem.poster_path != null
+                    // ) {
+                    //     background =
+                    //         "https://image.tmdb.org/t/p/w500" +
+                    //         thisItem.poster_path;
+                    // } else if (thisItem.poster_path == null) {
+                    //     background = "http://unsplash.it/g/500?random&blur";
+                    // } else {
+                    //     background =
+                    //         "https://image.tmdb.org/t/p/w500" +
+                    //         thisItem.backdrop_path;
+                    // }
 
                     // set handlebars template
                     var context = {
+                        poster: background,
                         movieTitle: title,
                         movieOgTitle: originalTitle,
                         // movieLang: thisMovie.original_language,
@@ -102,6 +134,7 @@ function apiCall(apiUrl, param) {
                         // movieVote: thisMovie.vote_average,
                         movieVote: starVote,
                         // overview: thisMovie.overview,
+                        type: type,
                     };
 
                     compileHandlebars(context);
