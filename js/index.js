@@ -136,9 +136,9 @@ function compileHandlebars(context) {
  * @param {int} vote
  */
 function calcStars(vote) {
-    console.log(vote);
+    // console.log(vote);
     let voteFifth = Math.round(vote / 2);
-    console.log(voteFifth);
+    // console.log(voteFifth);
 
     let result = "";
 
