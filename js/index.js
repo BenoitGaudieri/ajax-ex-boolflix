@@ -3,16 +3,12 @@ $(document).ready(function () {
     var button = $(".btn");
     var input = $(".movie-search");
 
-    // Init handlebars
-    var source = $("#movie-template").html();
-    var template = Handlebars.compile(source);
-
     button.click(() => {
         event.preventDefault();
         if (input.val() == "") {
             alert("Inserisci un valore per la ricerca");
         } else {
-            search($(".movie-search").val().trim().toLowerCase(), template);
+            search($(".movie-search").val().trim().toLowerCase());
         }
     });
 
@@ -21,7 +17,7 @@ $(document).ready(function () {
             if (input.val() == "") {
                 alert("Inserisci un valore per la ricerca");
             } else {
-                search($(".movie-search").val().trim().toLowerCase(), template);
+                search($(".movie-search").val().trim().toLowerCase());
             }
         }
     });
@@ -41,9 +37,11 @@ $(document).ready(function () {
 
 //  search
 
-function search(param, template) {
+function search(param) {
     // Api refs
     const apiUrl = "https://api.themoviedb.org/3/search/movie/";
+    const apiMovUrl = "https://api.themoviedb.org/3/search/movie/";
+    const apiTvUrl = "https://api.themoviedb.org/3/search/movie/";
     const apiKey = "45238788959bfbb11d47d87b302def00";
     let lang = "it-IT";
 
@@ -75,15 +73,14 @@ function search(param, template) {
                     var context = {
                         movieTitle: thisMovie.title,
                         movieOgTitle: thisMovie.original_title,
-                        movieLang: thisMovie.original_language,
+                        // movieLang: thisMovie.original_language,
+                        movieLang: lang,
                         // movieVote: thisMovie.vote_average,
                         movieVote: starVote,
                         // overview: thisMovie.overview,
                     };
 
-                    // compile and append template
-                    var html = template(context);
-                    $(".movie--container").append(html);
+                    compileHandlebars(context);
                 }
             } else {
                 alert("Nessun film trovato");
@@ -96,8 +93,29 @@ function search(param, template) {
     });
 }
 
+/**
+ * Handlebars compiler
+ * @param {context} object data
+ */
+function compileHandlebars(context) {
+    // Init handlebars
+    var source = $("#movie-template").html();
+    var template = Handlebars.compile(source);
+
+    // compile and append context object
+    var html = template(context);
+    $(".movie--container").append(html);
+}
+
+/**
+ * Vote in fifths with stars
+ * @param {int} vote
+ */
 function calcStars(vote) {
+    console.log(vote);
     let voteFifth = Math.round(vote / 2);
+    console.log(voteFifth);
+
     let result = "";
 
     for (let i = 0; i < 5; i++) {
@@ -112,5 +130,11 @@ function calcStars(vote) {
 }
 
 function checkFlag(lang) {
-    // controllo se flag
+    if (lang == "it") {
+        return '<img src="img/it.svg" alt="it">';
+    } else if (lang == "en") {
+        return '<img src="img/en.svg" alt="en">';
+    } else {
+        return lang;
+    }
 }

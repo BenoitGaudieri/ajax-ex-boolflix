@@ -88,3 +88,7 @@ body {
 .ellipsis {
     text-overflow: ellipsis;
 } */
+
+.movie--result img {
+    width: 16px;
+}
