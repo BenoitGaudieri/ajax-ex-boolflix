@@ -40,24 +40,33 @@ $(document).ready(function () {
  * @param {string} param from search query
  */
 function search(param) {
-    // Api refs
-    const apiMovUrl = "https://api.themoviedb.org/3/search/movie/";
-    const apiTvUrl = "https://api.themoviedb.org/3/search/tv/";
-
     // empty the results
     $(".movie--container").html("");
 
-    apiCall(apiMovUrl, param, "movie");
-    apiCall(apiTvUrl, param, "tv");
+    if ($("input[name=type]:checked").val() == "both") {
+        apiCall(param, "movie");
+        apiCall(param, "tv");
+    } else {
+        var searchType = $("input[name=type]:checked").val();
+        console.log($("input[name=type]:checked").val());
+        apiCall(param, searchType);
+    }
 }
 
 /**
  * Ajax call
- * @param {url} apiUrl
  * @param {string} param search query from main search
  * @param {string} media check if tv or movie
  */
-function apiCall(apiUrl, param, media) {
+function apiCall(param, media) {
+    // Api url logic
+    let apiUrl = "";
+    if (media == "movie") {
+        apiUrl = "https://api.themoviedb.org/3/search/movie/";
+    } else {
+        apiUrl = "https://api.themoviedb.org/3/search/tv/";
+    }
+
     const apiKey = "45238788959bfbb11d47d87b302def00";
     let lang = "it-IT";
     // Api call

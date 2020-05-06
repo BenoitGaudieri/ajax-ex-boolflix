@@ -44,6 +44,11 @@ body {
     margin: 0 10px;
 }
 
+.search-bar label {
+    color: #fff;
+    margin: 0 15px 0 5px;
+}
+
 .search-bar {
     display: flex;
     align-items: center;
@@ -87,7 +92,7 @@ body {
 }
 
 .movie-search:focus {
-    width: 70%;
+    width: 100%;
     border-color: #66cc75;
     box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
