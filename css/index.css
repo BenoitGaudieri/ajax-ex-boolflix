@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: "Fira Sans", sans-serif;
     background-color: #0f171e;
 }
 
@@ -30,6 +30,16 @@ body {
 .left-side {
     color: #fff;
     display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 35px;
+    letter-spacing: 2px;
+    font-family: "Overlock SC", cursive;
+    text-transform: uppercase;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .links {
@@ -70,7 +80,7 @@ body {
 }
 
 .movie-search {
-    width: 38%;
+    width: 36%;
     height: 100%;
     padding: 9px 10px 9px 40px;
     border: 0;
@@ -130,22 +140,19 @@ body {
     }
 }
 
-/* .movie-search:focus {
-    width: 100%;
-    border-color: #66cc75;
-    box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
-}
-
-.movie-search:focus .fa-search {
-    color: #7d7575;
-} */
-
-.hidden {
+.clear {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    color: #fff;
+    transition: all 0.5s;
     display: none;
+    cursor: pointer;
 }
 
-.movie-search:focus .hidden {
-    display: block;
+.input-bar:focus-within .clear,
+.input-bar:hover .clear {
+    color: #000;
 }
 
 /* Movie section */

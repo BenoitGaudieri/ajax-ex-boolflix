@@ -13,6 +13,11 @@ $(document).ready(function () {
     });
 
     input.keyup(function (e) {
+        if (input.val() != "") {
+            $(".clear").show();
+        } else {
+            $(".clear").hide();
+        }
         if (e.which == 13 || e.keyCode == 13) {
             if (input.val() == "") {
                 alert("Inserisci un valore per la ricerca");
@@ -20,6 +25,11 @@ $(document).ready(function () {
                 search($(".movie-search").val().trim().toLowerCase());
             }
         }
+    });
+
+    $(".clear").click(() => {
+        input.val("");
+        $(".clear").hide();
     });
 
     // $(".toggle").click(() => {
