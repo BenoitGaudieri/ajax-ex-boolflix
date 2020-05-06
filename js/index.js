@@ -47,16 +47,17 @@ function search(param) {
     // empty the results
     $(".movie--container").html("");
 
-    apiCall(apiMovUrl, param);
-    apiCall(apiTvUrl, param);
+    apiCall(apiMovUrl, param, "movie");
+    apiCall(apiTvUrl, param, "tv");
 }
 
 /**
  * Ajax call
  * @param {url} apiUrl
  * @param {string} param search query from main search
+ * @param {string} media check if tv or movie
  */
-function apiCall(apiUrl, param) {
+function apiCall(apiUrl, param, media) {
     const apiKey = "45238788959bfbb11d47d87b302def00";
     let lang = "it-IT";
     // Api call
@@ -80,25 +81,27 @@ function apiCall(apiUrl, param) {
                     let lang = checkFlag(thisItem.original_language);
                     let title = "";
                     let originalTitle = "";
-                    let background = "";
                     let type = "";
+                    let background = "";
                     let overview = thisItem.overview.substr(0, 80) + "...";
 
                     // check if movie or tv show
-                    // title
-                    if (thisItem.title == undefined) {
+                    if (media == "tv") {
+                        // Title
                         title = thisItem.name;
+                        // Type
                         type = "TV show";
-                    } else {
-                        title = thisItem.title;
-                        type = "Movie";
-                    }
-                    // original title
-                    if (thisItem.original_title == undefined) {
+                        // Original title
                         originalTitle = thisItem.original_name;
                     } else {
+                        // Title
+                        title = thisItem.title;
+                        // Type
+                        type = "Movie";
+                        // Original title
                         originalTitle = thisItem.original_title;
                     }
+
                     // background
                     if (thisItem.backdrop_path != null) {
                         background =
