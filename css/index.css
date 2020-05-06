@@ -90,12 +90,18 @@ body {
     transition: all 0.5s;
 }
 
+.input-bar .movie-search {
+    color: #fff;
+}
+
 .movie-search:hover,
 .movie-search:focus {
     background-color: #fff;
+    color: #000;
 }
 
-.input-bar:focus-within .movie-search {
+.input-bar:focus-within .movie-search,
+.movie-search:valid {
     width: 100%;
     border-color: #66cc75;
     box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
