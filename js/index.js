@@ -129,8 +129,18 @@ function apiCall(apiUrl, param, media) {
                     compileHandlebars(context);
                 }
             } else {
-                console.log("Nessun risultato trovato");
-                $(".movie-search").select();
+                switch (media) {
+                    case "movie":
+                        $(".movie--container").append(
+                            "<div class='error'>Non sono stati trovati film corrispondenti al termine di ricerca.</div>"
+                        );
+                        break;
+                    case "tv":
+                        $(".movie--container").append(
+                            "<div class='error'>Non sono state trovate serie tv corrispondenti al termine di ricerca.</div>"
+                        );
+                        break;
+                }
             }
         },
         error: function (err) {
