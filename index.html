@@ -10,7 +10,7 @@
         integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Overlock+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700|Overlock+SC&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -57,11 +57,10 @@
         <div class="movie--output">
             <img class="background" src="{{poster}}" alt="background">
             <ul class="movie--result">
-                <li>Titolo: {{movieTitle}}</li>
+                <li class="title">{{movieTitle}}</li>
                 <li>Titolo originale: {{movieOgTitle}}</li>
                 <li>Lingua originale: {{{movieLang}}}</li>
-                <!-- <li>Voto: {{movieVote}}</li> -->
-                <li>Voto: {{{movieVote}}}</li>
+                <li class="rating">Voto: {{{movieVote}}}</li>
                 <li>Tipo: {{type}} </li>                
                 <li>Descrizione: {{overview}}
                      <!-- <a href="#" class="toggle">View more...</a> -->
