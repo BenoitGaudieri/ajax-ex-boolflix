@@ -78,24 +78,61 @@ body {
     border: 1px solid #ccc;
     vertical-align: middle;
     font-size: 20px;
-    background-color: #ededed;
+    /* background-color: #ededed; */
+    background-color: #0f171e;
     border-radius: 10em;
     transition: all 0.5s;
 }
 
 .fa-search {
-    color: #7d7575;
+    /* color: #7d7575; */
+    color: #fff;
+    transition: all 0.5s;
 }
 
-.movie-search:hover {
+.movie-search:hover,
+.movie-search:focus {
     background-color: #fff;
 }
 
-.movie-search:focus {
+.input-bar:focus-within .movie-search {
     width: 100%;
     border-color: #66cc75;
     box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
+
+#search-selector input,
+#search-selector label {
+    cursor: pointer;
+}
+
+.input-bar:focus-within .fa-search,
+.input-bar:hover .fa-search {
+    /* color: #7d7575; */
+    background: linear-gradient(90deg, #00c0ff 0%, #ffcf00 49%, #fc4f4f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: color-rotate 1s infinite alternate;
+}
+
+@keyframes color-rotate {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* .movie-search:focus {
+    width: 100%;
+    border-color: #66cc75;
+    box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+
+.movie-search:focus .fa-search {
+    color: #7d7575;
+} */
 
 .hidden {
     display: none;
