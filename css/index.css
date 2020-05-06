@@ -136,8 +136,17 @@ body {
     bottom: 14px;
     list-style: none;
     width: 95%;
+    height: 90%;
     background: #00000070;
-    padding: 10px;
+    padding: 5px;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.movie--output:hover .movie--result {
+    opacity: 1;
 }
 
 .btn-primary {

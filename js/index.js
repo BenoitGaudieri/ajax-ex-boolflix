@@ -82,6 +82,7 @@ function apiCall(apiUrl, param) {
                     let originalTitle = "";
                     let background = "";
                     let type = "";
+                    let overview = thisItem.overview.substr(0, 80) + "...";
 
                     // check if movie or tv show
                     // title
@@ -119,12 +120,13 @@ function apiCall(apiUrl, param) {
                         movieLang: lang,
                         movieVote: starVote,
                         type: type,
+                        overview: overview,
                     };
 
                     compileHandlebars(context);
                 }
             } else {
-                alert("Nessun risultato trovato");
+                console.log("Nessun risultato trovato");
                 $(".movie-search").select();
             }
         },
@@ -172,11 +174,19 @@ function calcStars(vote) {
  * @param {string} lang from api call
  */
 function checkFlag(lang) {
-    if (lang == "it") {
-        return '<img src="img/it.svg" alt="it">';
-    } else if (lang == "en") {
-        return '<img src="img/en.svg" alt="en">';
+    let languages = ["en", "it"];
+
+    if (languages.includes(lang)) {
+        return '<img src="img/' + lang + '.svg" alt="' + lang + '">';
     } else {
         return lang;
     }
+
+    // if (lang == "it") {
+    //     return '<img src="img/it.svg" alt="it">';
+    // } else if (lang == "en") {
+    //     return '<img src="img/en.svg" alt="en">';
+    // } else {
+    //     return lang;
+    // }
 }
